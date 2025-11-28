@@ -25,7 +25,7 @@ const getGenres = async () => {
 const getMovies = async () => {
   const selectedGenre = getSelectedGenre();
   const discoverMovieEndpoint = "/discover/movie";
-  const requestParams = `?api_key=${tmdbKey}&with_genre=${selectedGenre}`;
+  const requestParams = `?api_key=${tmdbKey}&with_genres=${selectedGenre}`;
   const urlToFetch = `${tmdbBaseUrl}${discoverMovieEndpoint}${requestParams}`;
 
   try {
@@ -55,8 +55,8 @@ const getMovieInfo = async (movie) => {
     if (!response.ok) {
       throw new Error(`Request failed with status ${response.status}`);
     }
-    const jsonResponse = await response.json();
-    const movieInfo = jsonResponse.results;
+    const movieInfo = await response.json();
+    return movieInfo;
   } catch (error) {
     console.error("Error fetching movie", error);
     throw error;
